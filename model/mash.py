@@ -28,23 +28,20 @@ if __name__ == "__main__":
         phase = i % DDS_T
         input = int((np.sin(2 * np.pi * phase / DDS_T) + 1) * (1 << 31))
 
-        # ripple
-        c[0], s[0] = adder(input, last_s[0])
-        c[1], s[1] = adder(s[0], last_s[1])
-        c[2], s[2] = adder(s[1], last_s[2])
+        f[0] = -f[1]
+        f[1] = -f[2]
+
+        # ripple add
+        c[0], s[0] = adder(input, s[0])
+        f[0] = f[0] + c[0]
+        c[1], s[1] = adder(s[0], s[1])
+        f[1] = f[1] + c[1]
+        c[2], s[2] = adder(s[1], s[2])
+        f[2] = 0 + c[2]
 
         # noise cancelation logic
-        f[2] = c[2]
-        f[1] = c[1] - q[1] + f[2]
-        f[0] = c[0] - q[0] + f[1]
-
-        # update
-        last_s[0] = s[0]
-        last_s[1] = s[1]
-        last_s[2] = s[2]
-        q[0] = f[1]
-        q[1] = f[2]
-        q[2] = 0
+        f[1] = f[1] + f[2]
+        f[0] = f[0] + f[1]
 
         output[i] = f[0] + 3  # + (2**(MASH_ORDER - 1) - 1) to shift to positive
 
