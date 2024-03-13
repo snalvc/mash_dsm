@@ -26,7 +26,8 @@ if __name__ == "__main__":
 
     for i in range(ITERATIONS):
         phase = i % DDS_T
-        input = int((np.sin(2 * np.pi * phase / DDS_T) + 1) * (1 << 31))
+        # input = int((np.sin(2 * np.pi * phase / DDS_T) + 1) * (1 << 31))
+        input = 0xD0000000
 
         f[0] = -f[1]
         f[1] = -f[2]
