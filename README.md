@@ -1,6 +1,6 @@
 # Motivation
-RP2040 has dual-core ARM Cortex M0+ which run at 133Mhz top.
+The RP2040 boasts a dual-core ARM Cortex M0+ setup, each clocked at a maximum speed of 133MHz.
 
-How good can we achieve with one core dedicated to delta-sigma modulation and the other core dedicated to the control loop?
+How effective could we make use of this architecture by dedicating one core to delta-sigma modulation and the other to the control loop?
 
-Also, RP2040 comes with interesting such as interpolator and PIO which can help us implement the modulator. 
+Additionally, the RP2040 offers intriguing features like interpolators and PIO, which could greatly assist in implementing the modulator.
